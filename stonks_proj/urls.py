@@ -21,5 +21,5 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^api/stonks/$', views.stonk_list),
-    re_path(r'^api/stonks/([0-9])$', views.stonks_detail),
+    re_path(r'^api/stonks/<pk>', views.stonks_detail),
 ]

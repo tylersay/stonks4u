@@ -3,32 +3,38 @@ import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import NewStonkForm from "./NewStonkForm";
 
 const NewStonkModal = (props) => {
-  console.log("props", props)
-  const stonks = props.stonks
-  console.log("stonks", stonks)
+  console.log("props", props);
+  const stonks = props.stonks;
+  const newStonk = props.newStonk; //True 
+  const setStonks = props.setStonks;
   const [modal, setModal] = useState(false);
-  // const resetState = props.resetState
+  // const ticker = stonks.ticker
+  console.log("stonks", stonks);
+
   const toggle = () => {
     setModal(!modal);
   };
-  const newStonk = props.newStonk; //True or false
-  const setStonks = props.setStonks 
+  // const resetState = props.resetState
 
-  const button = (
-    <Button
-      color="primary"
-      className="float-right"
-      onClick={toggle}
-      style={{ minWidth: "200px" }}
-    >
-      New Stonk
-    </Button>
-  );
+
 
   let title = "Edit Stonks";
-  if (newStonk == true) {
+  let button = <Button onClick={toggle}>Edit</Button>;
+
+  if (newStonk) {
     title = "Add New Stonks";
+    button = (
+      <Button
+        color="primary"
+        className="float-right"
+        onClick={toggle}
+        style={{ minWidth: "200px" }}
+      >
+        New Stonk
+      </Button>
+    );
   }
+
 
   return (
     <>
@@ -39,8 +45,9 @@ const NewStonkModal = (props) => {
           <NewStonkForm
             // resetState={resetState}
             toggle={toggle}
-           stonks={stonks}
-           setStonks={setStonks}
+            stonks={stonks}
+          // ticker={ticker}
+            setStonks={setStonks}
           />
         </ModalBody>
       </Modal>

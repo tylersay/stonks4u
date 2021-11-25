@@ -30,6 +30,7 @@ def stonk_list(request):
 def stonks_detail(request, pk):
     try:
         stonk = Stonk.objects.get(pk=pk)
+        print("api", stonk)
     except Stonk.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 

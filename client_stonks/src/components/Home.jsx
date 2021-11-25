@@ -11,8 +11,8 @@ const Home = () => {
   useEffect(() => {
     const fetchStonk = async () => {
       const response = await axios.get(API_URL);
-      const stonksFromData = response.data;
-      setStonks(stonksFromData);
+      const stonksFromData = await response.data;
+      await setStonks(stonksFromData);
     };
     fetchStonk();
   }, []);

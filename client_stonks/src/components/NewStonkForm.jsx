@@ -15,52 +15,76 @@ const NewStonkForm = (props) => {
   // const fetchAgain = () => props.resetState
   // console.log('props.resetState', props.resetState)
   const stonks = props.stonks;
+  
+  console.log("stonks", stonks);
   const toggle = props.toggle
   const setStonks = props.setStonks
 
-  const initialState = {
+  // const initialState = {
+  //   pk: 0,
+  //   ticker: "",
+  //   name: "",
+  //   numShares: "",
+  //   purchaseDate: "",
+  // };
+
+  const [form, setForm] = useState({
     pk: 0,
     ticker: "",
     name: "",
     numShares: "",
     purchaseDate: "",
-  };
+  })
 
-  console.log("initialState", initialState);
+
+
+  console.log("form", form);
 //object destructuring
-  const [{ pk, ticker, name, numShares, purchaseDate }, setState] =
-    useState(initialState);
+  // const [{ pk, ticker, name, numShares, purchaseDate }, setState] =
+  //   useState(initialState);
 
   
-  console.log("stonks", stonks);
+  
 
 
   
-
+  const ticker = stonks.ticker
+  const numShares = stonks.numShares
+  const name = stonks.name
+  const purchaseDate = stonks.purchaseDate
   console.log("stonks.ticker", ticker);
 
   const onChange = (e) => {
-    const { name, value } = e.target;
-    console.log("line56", name, value)
-    setState((prevState) => ({ ...prevState, [name]: value }));
+    // const { name, value } = e.target;
+    const {name, ticker, numShares} = e.target
+    // console.log("line56", name, value)
+    // setState((prevState) => ({ ...prevState, [name]: value }));
+    setForm({...form, 
+      [name]: e.target.value,
+      [ticker]: e.target.value,
+      [numShares]: e.target.value,
+      [purchaseDate]: (new Date().toLocaleString() + '')
+    
+    })
   };
 
 
 
   const editStonk = (event) => {
     event.preventDefault();
-    axios.put(API_URL, {name, ticker, numShares, purchaseDate})
+    axios.put(API_URL+pk, form)
     .then(() => {
-      resetState();
+      // resetState();
       toggle()
     })
   }
 
   const createStonk = (event) => {
     event.preventDefault();
-    axios.post(API_URL, {name, ticker, numShares, purchaseDate})
+    axios.post(API_URL, form)
     .then(() => {
-      // setStonks((stonks) => [...prevState , stonks])
+      
+      setStonks((stonks) => [...stonks , form])
       toggle()
     })
   }
@@ -70,14 +94,14 @@ const NewStonkForm = (props) => {
   }
 
   return (
-    <Form onSubmit={() => createStonk(event) }>
+    <Form onSubmit={async() => await stonks? editStonk(event) : createStonk(event) }>
       <FormGroup>
         <Label for="ticker">Ticker:</Label>
         <Input
           type="text"
           name="ticker"
           onChange={onChange}
-          value={defaultIfEmpty(ticker)}
+          value={defaultIfEmpty(props.stonk.ticker)}
         />
       </FormGroup>
       <FormGroup>
@@ -99,6 +123,7 @@ const NewStonkForm = (props) => {
           value={defaultIfEmpty(numShares)}
         />
       </FormGroup>
+      
       <Button>Send</Button>
     </Form>
   );

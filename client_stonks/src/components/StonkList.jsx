@@ -1,8 +1,11 @@
 import React from "react";
 import { Table } from "reactstrap";
+import NewStonkModal from "./NewStonkModal";
+import RemoveModal from "./RemoveModal";
 
 const StonkList = (props) => {
   const stonks = props.stonks;
+  const setStonk = props.setStonk
   console.log(stonks);
   return (
     <Table dark>
@@ -31,16 +34,17 @@ const StonkList = (props) => {
               <td>{stonk.purchaseDate}</td>
 
               <td align="center">
-                {/* <NewStonkModal
+                <NewStonkModal
                     create={false}
                     stonk={stonk}
-                    resetState={props.resetState}
-                  /> */}
+                  //  resetState={props.resetState}
+                  />
                 &nbsp;&nbsp;
-                {/* <ConfirmRemovalModal
+                <RemoveModal
                     pk={stonk.pk}
-                    resetState={props.resetState}
-                  /> */}
+                    setStonk={setStonk}
+                  //  resetState={props.resetState}
+                  />
               </td>
             </tr>
           ))
