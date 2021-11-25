@@ -2,11 +2,13 @@ import React from "react";
 import { Table } from "reactstrap";
 import NewStonkModal from "./NewStonkModal";
 import RemoveModal from "./RemoveModal";
+import EditStonkModal from "./EditStonkModal";
 
 const StonkList = (props) => {
+  // console.log("stonkList props", props)  //// yes props 
   const stonks = props.stonks;
-  const setStonk = props.setStonk
-  console.log(stonks);
+  const setStonks = props.setStonks
+  console.log("stonkList stonks", stonks);
   return (
     <Table dark>
       <thead>
@@ -27,7 +29,7 @@ const StonkList = (props) => {
           </tr>
         ) : (
           stonks.map((stonk) => (
-            <tr key={stonk.pk}>
+            <tr key={stonk.id}>
               <td>{stonk.ticker}</td>
               <td>{stonk.name}</td>
               <td>{stonk.numShares}</td>
@@ -35,15 +37,17 @@ const StonkList = (props) => {
 
               <td align="center">
                 <NewStonkModal
-                    create={false}
-                    stonk={stonk}
-                  //  resetState={props.resetState}
+                    newStonk={false}
+                    stonks={stonks}
+                    setStonks={setStonks}
+                  
                   />
                 &nbsp;&nbsp;
                 <RemoveModal
-                    pk={stonk.pk}
-                    setStonk={setStonk}
-                  //  resetState={props.resetState}
+                    id={stonk.id}
+                    setStonks={setStonks}
+                    stonks={stonks}
+                  
                   />
               </td>
             </tr>

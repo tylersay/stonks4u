@@ -14,12 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
+from stonks_app.views import StonksViewSet
 from stonks_app import views
 from django.conf.urls import url
 
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'api/stonks', StonksViewSet)
+
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    re_path(r'^api/stonks/$', views.stonk_list),
-    re_path(r'^api/stonks/<pk>', views.stonks_detail),
+    # re_path(r'^api/stonks/$', views.stonk_list),
+    # re_path(r'^api/stonks/<pk>', views.stonks_detail),
 ]

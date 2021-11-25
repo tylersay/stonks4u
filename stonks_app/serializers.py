@@ -5,4 +5,4 @@ class StonksSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stonk 
-        fields = ('pk', 'ticker', 'name', 'numShares', 'purchaseDate')
+        fields = ('id', 'ticker', 'name', 'numShares', 'purchaseDate')

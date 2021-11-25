@@ -12,7 +12,7 @@ const Home = () => {
     const fetchStonk = async () => {
       const response = await axios.get(API_URL);
       const stonksFromData = await response.data;
-      await setStonks(stonksFromData);
+      setStonks(stonksFromData);
     };
     fetchStonk();
   }, []);

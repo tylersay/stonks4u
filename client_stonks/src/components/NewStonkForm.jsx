@@ -1,35 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  NavbarToggler,
-} from "reactstrap";
+import {Button, Form, FormGroup, Input, Label, NavbarToggler,} from "reactstrap";
 import axios from "axios";
 import { API_URL } from "../constants";
 
 const NewStonkForm = (props) => {
   console.log("props", props);
+  const setStonks = props.setStonks
   // const fetchAgain = () => props.resetState
   // console.log('props.resetState', props.resetState)
   const stonks = props.stonks;
-  
+  const id = stonks.pk
   console.log("stonks", stonks);
   const toggle = props.toggle
-  const setStonks = props.setStonks
-
-  // const initialState = {
-  //   pk: 0,
-  //   ticker: "",
-  //   name: "",
-  //   numShares: "",
-  //   purchaseDate: "",
-  // };
+  
 
   const [form, setForm] = useState({
-    pk: 0,
+    //pk: 0,
     ticker: "",
     name: "",
     numShares: "",
@@ -43,11 +29,6 @@ const NewStonkForm = (props) => {
   // const [{ pk, ticker, name, numShares, purchaseDate }, setState] =
   //   useState(initialState);
 
-  
-  
-
-
-  
   const ticker = stonks.ticker
   const numShares = stonks.numShares
   const name = stonks.name
@@ -72,7 +53,7 @@ const NewStonkForm = (props) => {
 
   const editStonk = (event) => {
     event.preventDefault();
-    axios.put(API_URL+pk, form)
+    axios.put(API_URL+id, form)
     .then(() => {
       // resetState();
       toggle()
@@ -94,14 +75,14 @@ const NewStonkForm = (props) => {
   }
 
   return (
-    <Form onSubmit={async() => await stonks? editStonk(event) : createStonk(event) }>
+    <Form onSubmit={() =>  createStonk(event)  }>
       <FormGroup>
         <Label for="ticker">Ticker:</Label>
         <Input
           type="text"
           name="ticker"
           onChange={onChange}
-          value={defaultIfEmpty(props.stonk.ticker)}
+          value={defaultIfEmpty(form.ticker)}
         />
       </FormGroup>
       <FormGroup>
@@ -110,7 +91,7 @@ const NewStonkForm = (props) => {
           type="text"
           name="name"
           onChange={onChange}
-          value={defaultIfEmpty(name)}
+          value={defaultIfEmpty(form.name)}
         />
       </FormGroup>
 
@@ -120,7 +101,7 @@ const NewStonkForm = (props) => {
           type="text"
           name="numShares"
           onChange={onChange}
-          value={defaultIfEmpty(numShares)}
+          value={defaultIfEmpty(form.numShares)}
         />
       </FormGroup>
       
