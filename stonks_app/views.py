@@ -18,6 +18,7 @@ def stonk_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        print("printing POST")
         serializer = StonksSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
