@@ -12,7 +12,8 @@ import { API_URL } from "../constants";
 
 const NewStonkForm = (props) => {
   console.log("props", props);
-  const resetState = props.resetState
+  const fetchAgain = () => props.resetState
+  console.log('props.resetState', props.resetState)
   const stonks = props.stonks;
   const toggle = props.toggle
 
@@ -31,25 +32,9 @@ const NewStonkForm = (props) => {
   
   console.log("stonks", stonks);
 
-  // const [pk, setPk] = useState(0)
-  // const [ticker, setTicker] = useState("")
-  // const [name, setName] = useState("")
-  // const [numShares, setNumShares] = useState("")
-  // const [purchaseDate, setPurchaseDate] = useState("")
 
-  // useEffect(() => {
-  //   if (stonks !== null) {
-  //     setPk(stonks.pk);
-  //     setTicker(stonks.ticker);
-  //     setName(stonks.name);
-  //     setNumShares(stonks.numShares);
-  //     setPurchaseDate(stonks.purchaseDate);
-  //   }
-  // });
-  // console.log("pk", pk);
   console.log("stonk.length", stonks.length)
-  // initialState.pk = (stonks.length + 1)
-  // console.log("pk", pk);
+
   console.log("stonks.ticker", ticker);
 
   const onChange = (e) => {
@@ -58,9 +43,7 @@ const NewStonkForm = (props) => {
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  // const onChange = e => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // };
+
 
   const editStonk = (event) => {
     event.preventDefault();
@@ -75,7 +58,7 @@ const NewStonkForm = (props) => {
     event.preventDefault();
     axios.post(API_URL, {name, ticker, numShares, purchaseDate})
     .then(() => {
-      resetState()
+      fetchAgain()
       toggle()
     })
   }
