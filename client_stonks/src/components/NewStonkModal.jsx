@@ -4,6 +4,7 @@ import NewStonkForm from "./NewStonkForm";
 
 const NewStonkModal = (props) => {
   console.log("props", props);
+  const stonk = props.stonk
   const stonks = props.stonks;
   const newStonk = props.newStonk; //True 
   const setStonks = props.setStonks;
@@ -45,6 +46,7 @@ const NewStonkModal = (props) => {
           <NewStonkForm
             // resetState={resetState}
             toggle={toggle}
+            stonk = {stonk}
             stonks={stonks}
           // ticker={ticker}
             setStonks={setStonks}

@@ -38,7 +38,7 @@ const StonkList = (props) => {
               <td align="center">
                 <NewStonkModal
                     newStonk={false}
-                    stonks={stonks}
+                    stonk={stonk}
                     setStonks={setStonks}
                   
                   />

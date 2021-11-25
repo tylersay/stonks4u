@@ -33,10 +33,11 @@ const RemoveModal = (props) => {
   const deleteStonk = async (id) => {
     console.log("id", props.id)
     await axios.delete(API_URL + props.id).then(() => {
-     const stonks = stonks.filter((id) => stonks.id !== id)
-      setStonks(stonks);
-      // getStonks()
       toggle();
+     const RemainingStonks = stonks.filter((id) => stonks.id !== id)
+      setStonks(RemainingStonks);
+      // getStonks()
+      
     });
   };
 

@@ -6,11 +6,14 @@ import { API_URL } from "../constants";
 const NewStonkForm = (props) => {
   console.log("props", props);
   const setStonks = props.setStonks
+  const stonk = props.stonk
   // const fetchAgain = () => props.resetState
   // console.log('props.resetState', props.resetState)
   const stonks = props.stonks;
-  const id = stonks.pk
+  const id = stonk.id
+  
   console.log("stonks", stonks);
+  console.log("stonk", stonk);
   const toggle = props.toggle
   
 
@@ -22,6 +25,12 @@ const NewStonkForm = (props) => {
     purchaseDate: "",
   })
 
+  // const [singleStonk, setSingleStonk] = useState({
+  //   ticker : stonk.ticker,
+  //   name : stonk.name,
+  //   numShares : stonk.numShares,
+  //   purchaseDate : stonk.purchaseDate
+  // })
 
 
   console.log("form", form);
@@ -29,10 +38,10 @@ const NewStonkForm = (props) => {
   // const [{ pk, ticker, name, numShares, purchaseDate }, setState] =
   //   useState(initialState);
 
-  const ticker = stonks.ticker
-  const numShares = stonks.numShares
-  const name = stonks.name
-  const purchaseDate = stonks.purchaseDate
+  const ticker = stonk.ticker
+  const numShares = stonk.numShares
+  const name = stonk.name
+  const purchaseDate = stonk.purchaseDate
   console.log("stonks.ticker", ticker);
 
   const onChange = (e) => {
@@ -44,16 +53,22 @@ const NewStonkForm = (props) => {
       [name]: e.target.value,
       [ticker]: e.target.value,
       [numShares]: e.target.value,
-      [purchaseDate]: (new Date().toLocaleString() + '')
+     // [purchaseDate]: (new Date().toLocaleString() + '')
     
     })
-  };
 
+    // setSingleStonk({...singleStonk,
+    //   [name]: e.target.value,
+    //   [ticker]: e.target.value,
+    //   [numShares]: e.target.value,
+    //   [purchaseDate]:e.target.value})
+  };
+  
 
 
   const editStonk = (event) => {
-    event.preventDefault();
-    axios.put(API_URL+id, form)
+    //event.preventDefault();
+    axios.put(API_URL+id + "/", form)
     .then(() => {
       // resetState();
       toggle()
@@ -75,7 +90,7 @@ const NewStonkForm = (props) => {
   }
 
   return (
-    <Form onSubmit={() =>  createStonk(event)  }>
+    <Form onSubmit={() => stonk ? editStonk(event) : createStonk(event)  }>
       <FormGroup>
         <Label for="ticker">Ticker:</Label>
         <Input
