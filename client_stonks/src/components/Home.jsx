@@ -6,19 +6,18 @@ import { useQuery, useQueryClient, QueryClient } from "react-query";
 import StonkList from "./StonkList";
 import NewStonkModal from "./NewStonkModal";
 
-const fetchStonk = async () => {
-  const response = await axios.get("http://localhost:8000/api/stonks/");
-  console.log("response", response);
-  const stonks = response.data;
-  console.log("response.stonks", stonks);
-  
-  return stonks;
-};
-
 const Home = () => {
-  const query = useQuery("stonks", fetchStonk);
-  console.log("query stonks", query)
-  const stonks = query.data
+  const [stonks, setStonks] = useState();
+  useEffect(() => {
+    const fetchStonk = async () => {
+      const response = await axios.get(API_URL);
+      const stonksFromData = response.data;
+      setStonks(stonksFromData);
+    };
+    fetchStonk();
+  }, []);
+
+  console.log("useState stonks", stonks);
   // if (status === "loading") {
   //   return <span>Loading...</span>;
   // }
@@ -28,20 +27,24 @@ const Home = () => {
   // }
 
   // console.log("stonks", stonks);
-  
+
   return (
     <Container style={{ marginTop: "20px" }}>
       <Row>
         <Col>
-          <StonkList stonks={stonks} resetState={fetchStonk} />
+          <StonkList 
+          stonks={stonks} setStonks={setStonks}
+          // resetState={fetchStonk} 
+          />
         </Col>
       </Row>
       <Row>
         <Col>
           <NewStonkModal
             newStonk={true}
-            resetState={fetchStonk}
+            // resetState={fetchStonk}
             stonks={stonks}
+            setStonks={setStonks}
           />
         </Col>
       </Row>

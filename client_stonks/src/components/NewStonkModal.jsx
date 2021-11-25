@@ -7,11 +7,12 @@ const NewStonkModal = (props) => {
   const stonks = props.stonks
   console.log("stonks", stonks)
   const [modal, setModal] = useState(false);
-  const resetState = props.resetState
+  // const resetState = props.resetState
   const toggle = () => {
     setModal(!modal);
   };
-  const newStonk = props.newStonk;
+  const newStonk = props.newStonk; //True or false
+  const setStonks = props.setStonks 
 
   const button = (
     <Button
@@ -36,9 +37,10 @@ const NewStonkModal = (props) => {
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
         <ModalBody>
           <NewStonkForm
-            resetState={resetState}
+            // resetState={resetState}
             toggle={toggle}
            stonks={stonks}
+           setStonks={setStonks}
           />
         </ModalBody>
       </Modal>

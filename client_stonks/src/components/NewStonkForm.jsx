@@ -12,28 +12,30 @@ import { API_URL } from "../constants";
 
 const NewStonkForm = (props) => {
   console.log("props", props);
-  const fetchAgain = () => props.resetState
-  console.log('props.resetState', props.resetState)
+  // const fetchAgain = () => props.resetState
+  // console.log('props.resetState', props.resetState)
   const stonks = props.stonks;
   const toggle = props.toggle
+  const setStonks = props.setStonks
 
   const initialState = {
-    
+    pk: 0,
     ticker: "",
     name: "",
     numShares: "",
     purchaseDate: "",
   };
+
   console.log("initialState", initialState);
 //object destructuring
-  const [{  ticker, name, numShares, purchaseDate }, setState] =
+  const [{ pk, ticker, name, numShares, purchaseDate }, setState] =
     useState(initialState);
 
   
   console.log("stonks", stonks);
 
 
-  console.log("stonk.length", stonks.length)
+  
 
   console.log("stonks.ticker", ticker);
 
@@ -58,7 +60,7 @@ const NewStonkForm = (props) => {
     event.preventDefault();
     axios.post(API_URL, {name, ticker, numShares, purchaseDate})
     .then(() => {
-      fetchAgain()
+      // setStonks((stonks) => [...prevState , stonks])
       toggle()
     })
   }
