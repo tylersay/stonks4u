@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "reactstrap";
 import NewStonkModal from "./NewStonkModal";
 import RemoveModal from "./RemoveModal";
-import EditStonkModal from "./EditStonkModal";
+
 
 const StonkList = (props) => {
   // console.log("stonkList props", props)  //// yes props 
